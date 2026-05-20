@@ -3,7 +3,6 @@
 > **Learn Morse code interactively with a visual dichotomic schema.**
 > Tap the telegraph key, follow the lit-up path, decode letters in real time.
 
-**🔗 Live demo:** https://USERNAME.github.io/morse-academy/
 **🛠 Full toolkit (translator, audio player, practice trainer, alphabet reference):** https://morse.megolo.com/
 
 ---
@@ -41,19 +40,13 @@ After 1 second of inactivity the current letter is added automatically. The most
 It's a single static file — just open it in a browser.
 
 ```bash
-git clone https://github.com/USERNAME/morse-academy.git
+git clone https://github.com/metastaa/morse-academy.git
 cd morse-academy
 open index.html        # macOS
 # or: xdg-open index.html   # Linux
 # or just double-click the file
 ```
 
-## 🌐 Deploy to GitHub Pages
-
-1. Push this repo to GitHub.
-2. Go to **Settings → Pages**.
-3. Under **Source**, pick **Deploy from a branch** → `main` → `/ (root)`.
-4. Your site goes live at `https://USERNAME.github.io/morse-academy/` within ~1 minute.
 
 ## 🧭 Roadmap / Want more?
 
