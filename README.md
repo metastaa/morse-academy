@@ -5,6 +5,9 @@
 
 **🛠 Full toolkit (translator, audio player, practice trainer, alphabet reference):** https://morse.megolo.com/
 
+<img width="2844" height="1542" alt="Screenshot 2026-05-20 at 05-50-38 Morse Academy — Learn Morse Code with an Interactive Visual Schema" src="https://github.com/user-attachments/assets/a8a73dd7-9818-437a-8693-824d152128b8" />
+
+
 ---
 
 ## ✨ Features
