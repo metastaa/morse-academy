@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#2563eb">
+
+    <!-- Primary SEO -->
+    <title>Morse Academy — Learn Morse Code with an Interactive Visual Schema</title>
+    <meta name="description" content="Morse Academy is a free, interactive way to learn Morse code. Tap the telegraph key to send dots and dashes, follow the visual schema, and decode letters in real time. No signup, works in any browser.">
+    <meta name="keywords" content="morse academy, learn morse code, morse code chart, morse code schema, morse code tree, interactive morse code, morse code practice, telegraph key simulator, dot dash, morse alphabet, free morse code tool">
+    <meta name="author" content="Morse Academy">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta name="googlebot" content="index, follow">
+    <link rel="canonical" href="https://github.com/metastaa/morse-academy">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Morse Academy">
+    <meta property="og:url" content="https://github.com/metastaa/morse-academy">
+    <meta property="og:title" content="Morse Academy — Learn Morse Code Interactively">
+    <meta property="og:description" content="Tap the telegraph key, follow the visual schema, decode letters in real time. A free, interactive way to learn Morse code.">
+    <meta property="og:image" content="https://github.com/metastaa/morse-academyog-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Morse Academy — Learn Morse Code Interactively">
+    <meta name="twitter:description" content="Tap the telegraph key, follow the visual schema, decode letters in real time. Free.">
+    <meta name="twitter:image" content="https://github.com/metastaa/morse-academyog-image.png">
+
+    <!-- PWA / Apple -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Morse Academy">
+    <meta name="application-name" content="Morse Academy">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <!-- Favicon (inline SVG) -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232563eb'/%3E%3Ccircle cx='18' cy='32' r='6' fill='white'/%3E%3Crect x='30' y='26' width='22' height='12' rx='3' fill='white'/%3E%3C/svg%3E">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232563eb'/%3E%3Ccircle cx='18' cy='32' r='6' fill='white'/%3E%3Crect x='30' y='26' width='22' height='12' rx='3' fill='white'/%3E%3C/svg%3E">
+
+    <!-- Structured Data: WebApplication -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Morse Academy",
+      "url": "https://github.com/metastaa/morse-academy",
+      "description": "Free, interactive Morse code learning tool with a visual dichotomic schema and tap-to-send telegraph key.",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "Any (Web Browser)",
+      "browserRequirements": "Requires JavaScript. Requires HTML5.",
+      "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+      "sameAs": ["https://morse.megolo.com/"]
+    }
+    </script>
+
+    <!-- Structured Data: FAQ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is Morse code?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Morse code is a system that encodes letters and numbers as sequences of short signals called dots (•) and long signals called dashes (—). It was developed in the 1830s for use with the telegraph."}
+        },
+        {
+          "@type": "Question",
+          "name": "How does the Morse Academy schema work?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Each branch of the visual tree represents a dot (going left) or a dash (going right). Tap the SEND SIGNAL button briefly for a dot or hold it for a dash, and the schema lights up the path to the letter you are forming."}
+        },
+        {
+          "@type": "Question",
+          "name": "What is SOS in Morse code?",
+          "acceptedAnswer": {"@type": "Answer", "text": "SOS is ··· ——— ··· — three dots, three dashes, three dots. It is the international distress signal."}
+        }
+      ]
+    }
+    </script>
+
+    <style>
+        :root {
+            --bg: #f1f5f9;
+            --bg-elevated: #ffffff;
+            --bg-muted: #f8fafc;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --border-strong: #cbd5e1;
+            --line: #94a3b8;
+            --shape: #0f172a;
+            --primary: #2563eb;
+            --primary-deep: #1e40af;
+            --primary-soft: #dbeafe;
+            --accent: #ef4444;
+            --accent-glow: rgba(239, 68, 68, 0.35);
+            --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04), 0 1px 3px rgba(15, 23, 42, 0.06);
+            --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.08), 0 2px 4px -2px rgba(15, 23, 42, 0.05);
+            --shadow-lg: 0 10px 25px -5px rgba(15, 23, 42, 0.1), 0 8px 10px -6px rgba(15, 23, 42, 0.05);
+            --radius: 12px;
+        }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        html, body { overscroll-behavior: none; height: 100vh; overflow: hidden; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        /* HEADER */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 0.9rem;
+            background: var(--bg-elevated);
+            border-bottom: 1px solid var(--border);
+            flex-shrink: 0;
+        }
+        .brand { display: flex; align-items: center; gap: 0.55rem; font-weight: 700; font-size: 1.05rem; }
+        .brand-icon {
+            width: 30px; height: 30px;
+            border-radius: 7px;
+            background: linear-gradient(135deg, var(--primary), #7c3aed);
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-weight: 800; font-size: 0.8rem;
+            box-shadow: var(--shadow-sm);
+        }
+        .brand-name { letter-spacing: -0.01em; }
+        .icon-btn {
+            width: 34px; height: 34px;
+            border: 1px solid var(--border-strong);
+            background: var(--bg-elevated);
+            border-radius: 8px;
+            color: var(--text);
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.15s ease;
+        }
+        .icon-btn:hover { background: var(--bg-muted); }
+        .icon-btn svg { width: 17px; height: 17px; }
+
+        /* MAIN */
+        main {
+            flex: 1;
+            max-width: 100%;
+            overflow: hidden;
+            padding: 0.55rem 0.7rem;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+        }
+        /* SCHEMA VIEW must be a flex column so the tree fills the available height */
+        .panel-view {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            min-height: 0;
+        }
+
+        .intro {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            margin: 0 0 0.45rem 0;
+            line-height: 1.4;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        /* SCHEMA */
+        .schema-container {
+            position: relative;
+            width: 100%;
+            flex: 1;
+            min-height: 0;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-strong);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+        #svg-lines { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
+        .node {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            z-index: 2;
+            transition: transform 0.2s ease;
+        }
+        .node .char {
+            font-size: 0.85rem; font-weight: 700;
+            color: var(--text);
+            position: absolute; top: -16px;
+            transition: all 0.2s;
+        }
+        .node.left-label .char { top: auto; left: -16px; }
+        .node.right-label .char { top: auto; right: -16px; }
+
+        .shape { background: var(--shape); transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        .shape.dot { width: 12px; height: 12px; border-radius: 50%; }
+        .shape.h-dash { width: 24px; height: 7px; border-radius: 2px; }
+        .shape.v-dash { width: 7px; height: 24px; border-radius: 2px; }
+        .shape.wheel {
+            width: 28px; height: 28px;
+            background: transparent;
+            border: 2.5px solid var(--shape);
+            border-radius: 50%;
+            position: relative;
+        }
+        .shape.wheel::after, .shape.wheel::before {
+            content: ''; position: absolute;
+            background: var(--shape);
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .shape.wheel::before { width: 32px; height: 2.5px; }
+        .shape.wheel::after { width: 2.5px; height: 32px; }
+
+        .node.active .shape {
+            background: var(--accent);
+            box-shadow: 0 0 0 5px var(--accent-glow), 0 0 15px var(--accent-glow);
+            transform: scale(1.3);
+        }
+        .node.active .shape.wheel { border-color: var(--accent); background: transparent; }
+        .node.active .shape.wheel::before, .node.active .shape.wheel::after { background: var(--accent); }
+        .node.active .char { color: var(--accent); transform: scale(1.1); font-weight: 800; }
+        .node.path-active .shape { background: var(--primary); opacity: 0.8; }
+
+        /* CONTROL PANEL */
+        .control-panel {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+            flex-shrink: 0;
+        }
+        @media (max-width: 700px) { .control-panel { grid-template-columns: 1fr; } }
+
+        .card {
+            background: var(--bg-elevated);
+            padding: 0.6rem 0.75rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+        }
+        .card-title {
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--text-muted);
+            margin: 0 0 0.4rem 0;
+        }
+
+        .seq-display {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--bg-muted);
+            padding: 0.4rem 0.65rem;
+            border-radius: 8px;
+            margin-bottom: 0.45rem;
+            min-height: 38px;
+        }
+        .current-seq {
+            font-size: 1.15rem;
+            letter-spacing: 3px;
+            font-weight: 700;
+            font-family: ui-monospace, monospace;
+        }
+        .current-seq:empty::after { content: '—'; color: var(--text-muted); opacity: 0.4; }
+        .current-char {
+            font-size: 1.45rem;
+            color: var(--primary);
+            font-weight: 800;
+            min-width: 40px;
+            text-align: center;
+        }
+        .current-char.invalid { color: var(--accent); }
+
+        .signal-btn {
+            width: 100%;
+            height: 64px;
+            background: linear-gradient(180deg, var(--primary), var(--primary-deep));
+            color: white;
+            font-size: 0.92rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 0 var(--primary-deep), 0 6px 16px rgba(37, 99, 235, 0.3);
+            transition: transform 0.08s, box-shadow 0.08s;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            touch-action: none;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.03em;
+            margin-bottom: 0.3rem;
+        }
+        .signal-btn small { font-size: 0.66rem; font-weight: 500; opacity: 0.85; margin-top: 2px; }
+        .signal-btn:active, .signal-btn.pressed {
+            transform: translateY(4px);
+            box-shadow: 0 0 0 var(--primary-deep), 0 2px 8px rgba(37, 99, 235, 0.4);
+        }
+        .signal-btn.pressed { background: linear-gradient(180deg, var(--primary-deep), #1e3a8a); }
+        .signal-btn.error-flash { background: linear-gradient(180deg, var(--accent), #b91c1c) !important; }
+
+        .press-progress {
+            position: absolute;
+            bottom: 0; left: 0;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.85);
+            width: 0%;
+            transition: width 0.05s linear, background-color 0.1s;
+        }
+        .press-progress.dash { background: #fbbf24; }
+
+        .hint {
+            font-size: 0.66rem;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 0.2rem;
+        }
+        .hint kbd {
+            background: var(--bg-muted);
+            border: 1px solid var(--border-strong);
+            border-radius: 3px;
+            padding: 0px 4px;
+            font-family: ui-monospace, monospace;
+            font-size: 0.6rem;
+        }
+
+        .output-box {
+            font-size: 0.95rem;
+            min-height: 2.4rem;
+            background: var(--bg-muted);
+            padding: 0.5rem 0.6rem;
+            border-radius: 8px;
+            border: 1px dashed var(--border-strong);
+            word-wrap: break-word;
+            font-family: ui-monospace, monospace;
+            font-weight: 600;
+            color: var(--text);
+            line-height: 1.3;
+            white-space: pre-wrap;
+            user-select: text;
+            margin-bottom: 0.4rem;
+            flex: 1;
+            overflow: auto;
+        }
+        .output-box:empty::after {
+            content: attr(data-placeholder);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            opacity: 0.6;
+        }
+
+        .action-row { display: flex; gap: 0.3rem; flex-wrap: wrap; }
+        .action-row button {
+            flex: 1;
+            min-width: 50px;
+            padding: 0.4rem 0.3rem;
+            border: 1px solid var(--border-strong);
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            background: var(--bg-elevated);
+            color: var(--text);
+            font-size: 0.74rem;
+            transition: all 0.15s;
+        }
+        .action-row button:hover { background: var(--bg-muted); }
+        .action-row #btn-clear { background: transparent; color: #b91c1c; border-color: #fecaca; }
+        .action-row #btn-clear:hover { background: #fee2e2; }
+
+        /* FOOTER */
+        footer {
+            flex-shrink: 0;
+            text-align: center;
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            padding: 0.45rem 0.6rem 0.6rem;
+            line-height: 1.4;
+            background: var(--bg);
+            border-top: 1px solid var(--border);
+        }
+        footer a {
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+        }
+        footer a:hover { text-decoration: underline; }
+        footer .credit { display: block; font-size: 0.6rem; opacity: 0.55; margin-top: 0.2rem; font-style: italic; }
+
+        .toast {
+            position: fixed;
+            bottom: 1.2rem; left: 50%;
+            transform: translateX(-50%) translateY(80px);
+            background: var(--text);
+            color: var(--bg);
+            padding: 0.6rem 1rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            z-index: 300;
+            opacity: 0;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-lg);
+            pointer-events: none;
+        }
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+        @media (max-width: 600px) {
+            main { padding: 0.4rem; }
+            header { padding: 0.4rem 0.7rem; }
+            .brand-icon { width: 24px; height: 24px; font-size: 0.65rem; }
+            .brand { font-size: 0.9rem; gap: 0.4rem; }
+            .card { padding: 0.5rem 0.6rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- SEO content: visually hidden but crawlable -->
+<div style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="true">
+    <h1>Morse Academy — Learn Morse Code with an Interactive Visual Schema</h1>
+    <p>Morse Academy is a free, browser-based tool for learning Morse code. Tap the telegraph key to send dots and dashes, watch the visual schema light up the path to each letter, and read the decoded text in real time. No signup, no install — runs on any device.</p>
+    <h2>How to learn Morse code with the schema</h2>
+    <p>The schema is a dichotomic tree: every branch to the left represents a dot (•) and every branch to the right represents a dash (—). Start at the root and follow the signals you send to land on the correct letter. The most common English letters (E, T, A, I, N, M, S, O) sit closest to the root because they have the shortest codes.</p>
+    <h2>Examples</h2>
+    <ul>
+        <li>E = • (one dot)</li>
+        <li>T = — (one dash)</li>
+        <li>A = •— (dot dash)</li>
+        <li>N = —• (dash dot)</li>
+        <li>SOS = ••• ——— ••• (the international distress signal)</li>
+    </ul>
+    <p>For the full Morse code toolkit including a bidirectional translator, audio player, practice trainer and complete alphabet reference, visit morse.megolo.com.</p>
+</div>
+
+<header>
+    <div class="brand">
+        <div class="brand-icon" aria-hidden="true">··—</div>
+        <span class="brand-name">Morse Academy</span>
+    </div>
+    <button class="icon-btn" id="btn-sound" title="Toggle sound" aria-label="Toggle sound">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 010 7.07"/></svg>
+    </button>
+</header>
+
+<main>
+    <section class="panel-view" id="view-schema">
+        <p class="intro">Circles = dots (•), rectangles = dashes (—). Tap the button like a telegraph: <strong>short tap = dot</strong>, <strong>long hold = dash</strong>. Wait 1 second and the letter is added automatically.</p>
+
+        <div class="schema-container" id="schema-container">
+            <svg id="svg-lines"></svg>
+            <div id="nodes-layer"></div>
+        </div>
+
+        <div class="control-panel">
+            <div class="card">
+                <div class="card-title">Signal Input</div>
+                <div class="seq-display">
+                    <div class="current-seq" id="current-seq"></div>
+                    <div class="current-char" id="current-char">?</div>
+                </div>
+                <button class="signal-btn" id="btn-single">
+                    <span>SEND SIGNAL</span>
+                    <small>Short = Dot (•) · Long = Dash (—)</small>
+                    <div class="press-progress" id="press-progress"></div>
+                </button>
+                <div class="hint">
+                    <kbd>Space</kbd> = signal · <kbd>↵</kbd> = confirm · <kbd>⌫</kbd> = delete
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Decoded Text</div>
+                <div class="output-box" id="output-text" data-placeholder="Your text will appear here..."></div>
+                <div class="action-row">
+                    <button id="btn-space" title="Word space">Space</button>
+                    <button id="btn-backspace" title="Delete last">Delete</button>
+                    <button id="btn-copy" title="Copy">Copy</button>
+                    <button id="btn-clear" title="Clear">Clear</button>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    Want the full toolkit — translator, audio player, practice trainer &amp; complete alphabet reference?
+    <a href="https://morse.megolo.com/" target="_blank" rel="noopener">Visit morse.megolo.com →</a>
+    <span class="credit">Schema inspired by the Morse Code Receive Decoder Chart by Dave Nathanson KG6ZJO</span>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// MORSE DATA
+const MORSE = {
+    A:'.-', B:'-...', C:'-.-.', D:'-..', E:'.', F:'..-.', G:'--.', H:'....',
+    I:'..', J:'.---', K:'-.-', L:'.-..', M:'--', N:'-.', O:'---', P:'.--.',
+    Q:'--.-', R:'.-.', S:'...', T:'-', U:'..-', V:'...-', W:'.--', X:'-..-',
+    Y:'-.--', Z:'--..',
+    '0':'-----','1':'.----','2':'..---','3':'...--','4':'....-',
+    '5':'.....','6':'-....','7':'--...','8':'---..','9':'----.'
+};
+
+const nodesData = [
+    { id: '', char: 'S', x: 50, y: 15, shape: 'wheel' },
+    { id: '.', char: 'E', x: 42, y: 15, shape: 'dot' },
+    { id: '..', char: 'I', x: 30, y: 15, shape: 'dot' },
+    { id: '...', char: 'S', x: 20, y: 15, shape: 'dot' },
+    { id: '....', char: 'H', x: 10, y: 15, shape: 'dot' },
+    { id: '...-', char: 'V', x: 20, y: 35, shape: 'v-dash', labelClass: 'left-label' },
+    { id: '..-', char: 'U', x: 30, y: 35, shape: 'v-dash', labelClass: 'left-label' },
+    { id: '..-.', char: 'F', x: 38, y: 40, shape: 'dot' },
+    { id: '.-', char: 'A', x: 42, y: 35, shape: 'v-dash', labelClass: 'right-label' },
+    { id: '.-.', char: 'R', x: 30, y: 48, shape: 'dot' },
+    { id: '.-..', char: 'L', x: 20, y: 48, shape: 'dot' },
+    { id: '.--', char: 'W', x: 42, y: 60, shape: 'v-dash', labelClass: 'right-label' },
+    { id: '.--.', char: 'P', x: 20, y: 75, shape: 'dot' },
+    { id: '.---', char: 'J', x: 42, y: 90, shape: 'v-dash', labelClass: 'right-label' },
+    { id: '-', char: 'T', x: 60, y: 15, shape: 'h-dash' },
+    { id: '--', char: 'M', x: 72, y: 15, shape: 'h-dash' },
+    { id: '---', char: 'O', x: 84, y: 15, shape: 'h-dash' },
+    { id: '-.', char: 'N', x: 60, y: 60, shape: 'dot', labelClass: 'left-label' },
+    { id: '-..', char: 'D', x: 60, y: 75, shape: 'dot', labelClass: 'left-label' },
+    { id: '-...', char: 'B', x: 60, y: 90, shape: 'dot', labelClass: 'left-label' },
+    { id: '-..-', char: 'X', x: 72, y: 75, shape: 'h-dash' },
+    { id: '-.-', char: 'K', x: 72, y: 60, shape: 'h-dash' },
+    { id: '-.--', char: 'Y', x: 84, y: 60, shape: 'h-dash' },
+    { id: '-.-.', char: 'C', x: 78, y: 75, shape: 'dot' },
+    { id: '--.', char: 'G', x: 72, y: 35, shape: 'dot', labelClass: 'left-label' },
+    { id: '--..', char: 'Z', x: 72, y: 48, shape: 'dot', labelClass: 'right-label' },
+    { id: '--.-', char: 'Q', x: 84, y: 35, shape: 'h-dash' }
+];
+
+const svgPathData = `
+    M 10 15 L 84 15
+    M 20 15 L 20 35
+    M 30 15 L 30 40 L 38 40
+    M 42 15 L 42 90
+    M 42 48 L 20 48
+    M 42 75 L 20 75
+    M 60 15 L 60 90
+    M 60 60 L 84 60
+    M 60 75 L 72 75
+    M 72 60 L 78 60 L 78 75
+    M 72 15 L 72 48
+    M 72 35 L 84 35
+`;
+
+// FIXED CONFIG (no settings UI)
+const THRESHOLD_MS = 200;       // < threshold = dot, >= threshold = dash
+const AUTOCONFIRM_MS = 1000;    // wait time before auto-adding letter
+let soundOn = true;             // toggled by header button
+
+// AUDIO
+let audioCtx = null;
+let currentOsc = null;
+const FREQ = 700;
+
+function ensureAudio() {
+    if (!audioCtx) {
+        try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
+        catch(e) { return null; }
+    }
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    return audioCtx;
+}
+
+function startTone() {
+    if (!soundOn) return;
+    const ctx = ensureAudio(); if (!ctx) return;
+    stopTone();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.frequency.value = FREQ;
+    osc.type = 'sine';
+    gain.gain.setValueAtTime(0, ctx.currentTime);
+    gain.gain.linearRampToValueAtTime(0.18, ctx.currentTime + 0.01);
+    osc.connect(gain).connect(ctx.destination);
+    osc.start();
+    currentOsc = { osc, gain };
+}
+
+function stopTone() {
+    if (!currentOsc) return;
+    const ctx = audioCtx;
+    try {
+        currentOsc.gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.02);
+        currentOsc.osc.stop(ctx.currentTime + 0.03);
+    } catch(e) {}
+    currentOsc = null;
+}
+
+// SCHEMA RENDER
+function renderSchema() {
+    const svg = document.getElementById('svg-lines');
+    svg.innerHTML = '';
+    svg.setAttribute('viewBox', '0 0 100 100');
+    svg.setAttribute('preserveAspectRatio', 'none');
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttribute("d", svgPathData);
+    path.setAttribute("fill", "none");
+    path.setAttribute("vector-effect", "non-scaling-stroke");
+    path.style.stroke = 'var(--line)';
+    path.style.strokeWidth = '2';
+    svg.appendChild(path);
+
+    const layer = document.getElementById('nodes-layer');
+    layer.innerHTML = '';
+    nodesData.forEach(node => {
+        const div = document.createElement('div');
+        div.className = `node ${node.labelClass || ''}`;
+        div.id = `node-${node.id}`;
+        div.style.left = `${node.x}%`;
+        div.style.top = `${node.y}%`;
+        div.innerHTML = `
+            <div class="char">${node.id === '' ? '' : node.char}</div>
+            <div class="shape ${node.shape}"></div>
+        `;
+        layer.appendChild(div);
+    });
+}
+
+// STATE
+let currentSeq = "";
+let decodedText = "";
+let progressTimer;
+let confirmTimer;
+let isPressed = false;
+let pressStartTime = 0;
+
+const morseMap = {};
+nodesData.forEach(n => { if (n.id) morseMap[n.id] = n.char; });
+Object.entries(MORSE).forEach(([ch, code]) => { morseMap[code] = ch; });
+
+const $ = id => document.getElementById(id);
+
+function updateUI() {
+    document.querySelectorAll('.node').forEach(el => el.classList.remove('active','path-active'));
+
+    if (currentSeq === "") {
+        const root = $('node-');
+        if (root) root.classList.add('active');
+    } else {
+        for (let i = 1; i < currentSeq.length; i++) {
+            const partial = $(`node-${currentSeq.slice(0, i)}`);
+            if (partial) partial.classList.add('path-active');
+        }
+        const targetNode = $(`node-${currentSeq}`);
+        if (targetNode) targetNode.classList.add('active');
+    }
+
+    $('current-seq').innerText = currentSeq.replace(/\./g, '•').replace(/-/g, '—');
+
+    const elChar = $('current-char');
+    if (currentSeq === "") {
+        elChar.innerText = "?";
+        elChar.classList.remove('invalid');
+    } else {
+        const char = morseMap[currentSeq];
+        if (char) {
+            elChar.innerText = char;
+            elChar.classList.remove('invalid');
+        } else {
+            elChar.innerText = "·";
+            elChar.classList.add('invalid');
+        }
+    }
+}
+
+function inputSignal(symbol) {
+    const newSeq = currentSeq + symbol;
+    if (newSeq.length > 6) { flashError(); return; }
+    currentSeq = newSeq;
+    updateUI();
+
+    clearTimeout(confirmTimer);
+    confirmTimer = setTimeout(() => {
+        if (currentSeq !== "" && morseMap[currentSeq]) confirmLetter();
+    }, AUTOCONFIRM_MS);
+}
+
+function flashError() {
+    $('btn-single').classList.add('error-flash');
+    setTimeout(() => $('btn-single').classList.remove('error-flash'), 200);
+}
+
+function confirmLetter() {
+    const char = morseMap[currentSeq];
+    if (char) {
+        decodedText += char;
+        $('output-text').textContent = decodedText;
+    }
+    currentSeq = "";
+    updateUI();
+}
+
+// BUTTON
+function pointerDown(e) {
+    if (e && e.type !== 'keydown') e.preventDefault();
+    if (isPressed) return;
+    isPressed = true;
+    pressStartTime = Date.now();
+    $('btn-single').classList.add('pressed');
+    clearTimeout(confirmTimer);
+    startTone();
+    $('press-progress').style.width = '0%';
+    $('press-progress').classList.remove('dash');
+    progressTimer = setInterval(() => {
+        const elapsed = Date.now() - pressStartTime;
+        const pct = Math.min(100, (elapsed / THRESHOLD_MS) * 100);
+        $('press-progress').style.width = pct + '%';
+        if (elapsed >= THRESHOLD_MS) $('press-progress').classList.add('dash');
+    }, 30);
+}
+
+function pointerUp(e) {
+    if (e && e.type !== 'keyup') e.preventDefault();
+    if (!isPressed) return;
+    isPressed = false;
+    $('btn-single').classList.remove('pressed');
+    stopTone();
+    clearInterval(progressTimer);
+    $('press-progress').style.width = '0%';
+    $('press-progress').classList.remove('dash');
+
+    const duration = Date.now() - pressStartTime;
+    inputSignal(duration < THRESHOLD_MS ? '.' : '-');
+}
+
+// TOAST
+function toast(msg) {
+    const el = $('toast');
+    el.textContent = msg;
+    el.classList.add('show');
+    setTimeout(() => el.classList.remove('show'), 2000);
+}
+
+// EVENT BINDINGS
+const btn = $('btn-single');
+btn.addEventListener('mousedown', pointerDown);
+btn.addEventListener('mouseup', pointerUp);
+btn.addEventListener('mouseleave', e => { if (isPressed) pointerUp(e); });
+btn.addEventListener('touchstart', pointerDown, { passive: false });
+btn.addEventListener('touchend', pointerUp, { passive: false });
+btn.addEventListener('touchcancel', pointerUp);
+
+document.addEventListener('keydown', e => {
+    if (e.repeat) return;
+    if (e.code === 'Space') { e.preventDefault(); pointerDown(e); }
+    else if (e.code === 'Enter') { e.preventDefault(); if (currentSeq !== "" && morseMap[currentSeq]) confirmLetter(); }
+    else if (e.code === 'Backspace') {
+        e.preventDefault();
+        if (currentSeq) { currentSeq = currentSeq.slice(0, -1); updateUI(); }
+        else if (decodedText) { decodedText = decodedText.slice(0, -1); $('output-text').textContent = decodedText; }
+    }
+});
+document.addEventListener('keyup', e => {
+    if (e.code === 'Space') { e.preventDefault(); pointerUp(e); }
+});
+
+// ACTION BUTTONS
+$('btn-space').addEventListener('click', () => {
+    if (currentSeq !== "") confirmLetter();
+    if (!decodedText.endsWith(' ') && decodedText.length > 0) {
+        decodedText += " ";
+        $('output-text').textContent = decodedText;
+    }
+    currentSeq = "";
+    updateUI();
+});
+
+$('btn-backspace').addEventListener('click', () => {
+    if (currentSeq) { currentSeq = currentSeq.slice(0, -1); updateUI(); }
+    else if (decodedText) { decodedText = decodedText.slice(0, -1); $('output-text').textContent = decodedText; }
+});
+
+$('btn-copy').addEventListener('click', () => {
+    if (!decodedText) return;
+    navigator.clipboard.writeText(decodedText).then(() => toast('Copied ✓'));
+});
+
+$('btn-clear').addEventListener('click', () => {
+    decodedText = "";
+    $('output-text').textContent = decodedText;
+    currentSeq = "";
+    updateUI();
+});
+
+// SOUND TOGGLE
+const btnSound = $('btn-sound');
+function updateSoundIcon() {
+    btnSound.style.opacity = soundOn ? '1' : '0.45';
+    btnSound.setAttribute('aria-pressed', String(soundOn));
+}
+btnSound.addEventListener('click', () => {
+    soundOn = !soundOn;
+    updateSoundIcon();
+    toast(soundOn ? 'Sound on' : 'Sound off');
+});
+updateSoundIcon();
+
+// INIT
+renderSchema();
+updateUI();
+
+// Re-render on resize so the schema fits
+let resizeT;
+window.addEventListener('resize', () => {
+    clearTimeout(resizeT);
+    resizeT = setTimeout(renderSchema, 150);
+});
+</script>
+</body>
+</html>
